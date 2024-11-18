@@ -69,7 +69,7 @@ console.log(array1[1]); // -> undefined
 
 //array1.forEach( (item, index) => console.log(`${index} : ${item}`));
 
-
+/* 
 console.log("\n------The every and some methods------\n");
 //every, checks whether all the elements of the array meet a certain condition we have given.
 let array2 = [90, 80, 10, 20, 30, 100, 50];
@@ -93,3 +93,99 @@ anyNumberPresent = array1.some( (item) => {
 
 //Evolution #3
 anyNumberPresent = array1.some( item => typeof item === "number"); // -> true
+ */
+/* 
+console.log("\n------Filterings------\n");
+
+//The filter method copies all elements that have passed our test and returns them as a new array.
+let array1 = ["cat", 90, 80, 10, 20, 30, 100, 50, "dog"];
+console.log(array1.length); // -> 9
+let numbers = array1.filter(item => typeof item === "number"); // -> [90, 80, 10, 20, 30, 100, 50]
+console.log(numbers.length); // -> 7
+console.log(array1.length); // -> 9
+ */
+
+/* 
+console.log("\n------Mapping elements------\n");
+
+//we first use the filter method to copy only the elements that are numbers from array1.
+//It’s only in the next step that we call the map method, using method chaining.
+let array1 = ["cat", 90, 80, 10, 20, 30, 100, 50, "dog"];
+let squarePower = array1.filter(item => typeof item === "number").map(item => item*item); // -> [8100, 6400, 100, 400, 900, 10000, 2500]
+console.info(squarePower);
+ */
+/* 
+console.log("\n------Sorting------\n");
+
+let array1 = ["cat", 90, 80, 10, 20, 30, 100, 50, "dog"];
+let numbers = array1.filter(item => typeof item === "number"); // -> [90, 80, 10, 20, 30, 100, 50]
+console.log(numbers[0]);
+numbers.sort((first, second) => {
+    if( first < second) {
+        return -1
+    } else if(first == second) {
+        return 0;
+    } else {
+        return 1;
+    }
+}); // -> [10, 20, 30, 50, 80, 90, 100]
+console.log(numbers[0]);
+ */
+/* 
+console.log("\n------Reducing the array------\n");
+
+let numbers = [10, 20, 30, 50, 80, 90, 100]; // -> [10, 20, 30, 50, 80, 90, 100]
+let sum = numbers.reduce((accumulator, item) => accumulator + item);
+console.log(sum); // -> 380
+
+let anotherSum = numbers.reduce((accumulator, item) => accumulator + item, 1000);
+console.log(anotherSum); // -> 1380
+
+let strangeObj = numbers.reduce((accumulator, item, index) => {
+    accumulator[item] = index;
+    return accumulator;
+} , {});
+console.log(strangeObj); // -> {10: 0, 20: 1, 30: 2, 50: 3, 80: 4, 90: 5, 100: 6}
+ */
+/* 
+console.log("\n------Reversing the order of the elements------\n");
+
+//This method allows you to reverse the order of the array elements, while it works in place (we modify the original array).
+let numbers = [10, 20, 30, 50, 80, 90, 100]; // -> [10, 20, 30, 50, 80, 90, 100]
+console.log(numbers[0]); // -> 10
+numbers.reverse(); // -> [100, 90, 80, 50, 30, 20, 10]
+console.log(numbers[0]); // -> 100
+numbers.reverse(); // -> [10, 20, 30, 50, 80, 90, 100]
+console.log(numbers[0]); // -> 10
+ */
+
+console.log("\n------Looking for an element------\n");
+/* 
+The include method returns true if the item is located (otherwise it returns false).
+
+The indexOf method returns the index (that is, the position) of the first element found in the array with the value we are looking for, or -1 if we fail.
+
+In case of this method, we start the search from the left side of the array (i.e. from the beginning).
+
+The lastIndexOf method works similarly, the only difference being that the search starts from the right side (from the end of the array).
+ */
+
+let myPets = ["cat", "dog", "hamster", "canary", "shark", "cat", "dog"];
+console.log(myPets.includes("shark")); // -> true 
+console.log(myPets.includes("unicorn")); // -> false
+console.log(myPets.indexOf("dog")); // -> 1
+console.log(myPets.lastIndexOf("dog")); // -> 6
+console.log(myPets.indexOf("unicorn")); // -> -1
+/* 
+The find method returns the value if we find an item that meets our condition, and undefined if it does not.
+
+The findIndex method will return the index of the found element if successful, or -1 if unsuccessful.
+ */
+
+
+console.log(myPets.find(item => item.length > 3)); // -> hamster
+console.log(myPets.find(item => item.includes("og"))); // -> dog
+console.log(myPets.find(item => item.includes("fish"))); // -> undefined
+console.log(myPets.findIndex(item => item.length > 3)); // -> 2
+console.log(myPets.findIndex(item => item.includes("og"))); // -> 1
+console.log(myPets.findIndex(item => item.includes("fish"))); // -> -1
