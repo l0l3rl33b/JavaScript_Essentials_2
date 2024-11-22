@@ -159,7 +159,7 @@ numbers.reverse(); // -> [10, 20, 30, 50, 80, 90, 100]
 console.log(numbers[0]); // -> 10
  */
 
-console.log("\n------Looking for an element------\n");
+//console.log("\n------Looking for an element------\n");
 /* 
 The include method returns true if the item is located (otherwise it returns false).
 
@@ -169,23 +169,102 @@ In case of this method, we start the search from the left side of the array (i.e
 
 The lastIndexOf method works similarly, the only difference being that the search starts from the right side (from the end of the array).
  */
-
+/* 
 let myPets = ["cat", "dog", "hamster", "canary", "shark", "cat", "dog"];
 console.log(myPets.includes("shark")); // -> true 
 console.log(myPets.includes("unicorn")); // -> false
 console.log(myPets.indexOf("dog")); // -> 1
 console.log(myPets.lastIndexOf("dog")); // -> 6
 console.log(myPets.indexOf("unicorn")); // -> -1
+ */
 /* 
 The find method returns the value if we find an item that meets our condition, and undefined if it does not.
 
 The findIndex method will return the index of the found element if successful, or -1 if unsuccessful.
  */
 
-
+/* 
 console.log(myPets.find(item => item.length > 3)); // -> hamster
 console.log(myPets.find(item => item.includes("og"))); // -> dog
 console.log(myPets.find(item => item.includes("fish"))); // -> undefined
 console.log(myPets.findIndex(item => item.length > 3)); // -> 2
 console.log(myPets.findIndex(item => item.includes("og"))); // -> 1
 console.log(myPets.findIndex(item => item.includes("fish"))); // -> -1
+ */
+/* 
+console.log("\n------Copying a selected part of the array------\n");
+
+let myPets = ["cat", "dog", "hamster", "canary", "shark", "cat", "dog"];
+let p1 = myPets.slice(3); // ->  ["canary", "shark", "cat", "dog"]
+let p2 = myPets.slice(3, 5); // -> ["canary", "shark"]
+let p3 = myPets.slice(-3); // -> ["shark", "cat", "dog"]
+let p4 = myPets.slice(-3, -1); // -> ["shark", "cat"]
+ */
+
+console.log("\n------Deleting and replacing a selected part of the array------\n");
+
+//splice, works for a change in place, and modifies the original array.
+//What is important is that the method returns the deleted elements (e.g. we can store them in a variable or, as in the example, display them).
+/* 
+let myPets = ["cat", "dog", "hamster", "canary", "shark", "cat", "dog"];
+let removedPets = myPets.splice(2, 3); 
+console.log(myPets); // -> ["cat", "dog", "cat", "dog"]
+console.log(removedPets); // -> ["hamster", "canary", "shark"]
+ */
+//The splice method can also be used to insert new elements into the array.
+//If we don’t want to delete anything, then we give 0 as the second argument.
+//For any subsequent arguments, we give the values to be located in a specified place of the array.
+//Therefore, we can call splice to simultaneously remove several selected elements and insert new ones in their place, or we can add new ones from the indicated index without removing the existing ones.
+/* 
+let myPets = ["cat", "dog", "hamster", "canary", "shark", "cat", "dog"];
+myPets.splice(2, 0, "rabbit", "guinea pig");
+console.log(myPets); // -> ["cat", "dog", "rabbit", "guinea pig", "hamster", "canary", "shark", "cat", "dog"]
+ */
+
+//console.log("\n------The destructuring assignmenty------\n");
+//We learned about the destructuring assignment when looking at objects.
+/* 
+let myPets = ["cat", "dog", "hamster", "canary"];
+let pet1 = myPets[0];
+let pet3 = myPets[2];
+let pet4 = myPets[3];
+console.log(pet1); // -> cat
+console.log(pet3); // -> hamster
+ */
+//We have assigned selected elements from the myPets array to the variables pet1, pet2, and pet3. The same effect can be achieved by using a destructive assignment.
+/* 
+let [pet1, , pet3, pet4] = myPets;
+console.log(pet1); // -> cat
+console.log(pet3); // -> hamster
+ */
+//If we don't want to copy any of the array items, we can mark it by leaving a blank field separated by commas.
+/* 
+let myPets = ["cat", "dog"];
+let [pet1, , pet3] = myPets;
+console.log(pet1); // -> cat
+console.log(pet3); // -> undefined
+ */
+//The destructuring assignment allows us to prepare default values, which will be used if there is no element in the array (otherwise the default value is ignored).
+/* 
+let myPets = ["cat", "dog"];
+let [pet1 = "fish", , pet3 = "fish"] = myPets;
+console.log(pet1); // -> cat
+console.log(pet3); // -> fish
+ */
+
+console.log("\n------The spread operator in arrays------\n");
+//An equally useful technique is the use of the spread operator (i.e. three dots).
+
+//It allows the spread of the array into individual elements where a list of elements or arguments is expected.
+
+//The simplest example is to use elements of an existing array to create a new one.
+
+let array1 = [100, 200, 300];
+let array2 = [1000, 2000];
+let array3 = [10, 20, ...array1, 500, ...array2]; //-> [10, 20, 100, 200, 300, 500, 1000, 2000]
+
+//The operator can also be used to spread the array over the elements while passing them on as arguments of the function.
+
+let testFn = (a, b, c, d) => a + b + c + d;
+let array = [10, 20, 30, 40];
+console.log(testFn(...array)); // -> 100
