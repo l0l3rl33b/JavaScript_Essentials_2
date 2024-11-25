@@ -252,19 +252,168 @@ console.log(pet1); // -> cat
 console.log(pet3); // -> fish
  */
 
-console.log("\n------The spread operator in arrays------\n");
+//console.log("\n------The spread operator in arrays------\n");
 //An equally useful technique is the use of the spread operator (i.e. three dots).
 
 //It allows the spread of the array into individual elements where a list of elements or arguments is expected.
 
 //The simplest example is to use elements of an existing array to create a new one.
-
+/* 
 let array1 = [100, 200, 300];
 let array2 = [1000, 2000];
 let array3 = [10, 20, ...array1, 500, ...array2]; //-> [10, 20, 100, 200, 300, 500, 1000, 2000]
-
+ */
 //The operator can also be used to spread the array over the elements while passing them on as arguments of the function.
-
+/* 
 let testFn = (a, b, c, d) => a + b + c + d;
 let array = [10, 20, 30, 40];
 console.log(testFn(...array)); // -> 100
+ */
+/* 
+console.log("\n------Set------\n");
+
+//The Set constructor is used to create a collection of unique elements.
+//Elements of the same value cannot appear in a collection of this type.
+//Additionally, the same elements could appear in the array in different positions.
+//Formally, each element of the set collection consists of a key and a value.
+
+//The constructor can accept the array as an argument.
+
+let emptySet = new Set(); // -> {}
+console.log(emptySet.size); // -> 0
+let petsSet = new Set(["cat", "dog", "cat"]); // -> {"cat", "dog"}
+console.log(petsSet.size); // -> 2
+console.log(petsSet.has("cat")); // -> true
+console.log(petsSet.has("shark")); // -> false 
+
+petsSet.add("shark");
+petsSet.add("hamster");
+console.log(petsSet.size); // -> 4
+console.log(petsSet.has("shark")); // -> true
+petsSet.delete("dog"); // -> true
+petsSet.delete("dog"); // -> false
+console.log(petsSet.size); // -> 3
+petsSet.clear();
+console.log(petsSet.size); // -> 0
+
+let petsSet2 = new Set(["cat", "dog", "hamster"]); // -> {"cat", "dog", "hamster"}
+petsSet2.forEach(value => console.log(value)); // -> cat -> dog -> hamster
+
+//In this example, we use the fact that we know the number of items in the collection and how many times we call the next method of our petsIterator iterator.
+let petsSet3 = new Set(["cat", "dog", "hamster"]); // -> {"cat", "dog", "hamster"}
+let petsIterator = petsSet3.values();
+console.log(petsIterator.next().value); // -> cat
+console.log(petsIterator.next().value); // -> dog
+console.log(petsIterator.next().value); // -> hamster
+
+let petsIterator2 = petsSet.values();
+let result = petsIterator2.next();
+while (!result.done) {
+    console.log(result.value); // -> cat -> dog -> hamster
+ result = petsIterator2.next();
+}
+
+let petsSet4 = new Set(["cat", "dog", "hamster"]); // -> {"cat", "dog", "hamster"}
+console.log(petsSet4 instanceof Set); // -> true
+let petsArray = [...petsSet4]; // -> ["cat", "dog", "hamster"]
+console.log(petsArray instanceof Array); // -> true
+ */
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+/* 
+console.log("\n------Map------\n");
+
+//The next constructor we will discuss, Map, is also used to create a collection of elements.
+//In this case, each element of this collection consists of a different key:value pair.
+
+let emptyMap = new Map();
+let petsMap = new Map([["cats", 1],[ "dogs", 2],[ "hamsters", 5]]);
+console.log(emptyMap.size); // -> 0
+console.log(petsMap.size); // -> 3
+console.log(petsMap.has("dogs")); // -> true
+console.log(petsMap.has("sharks")); // -> false
+console.log(petsMap.has(1)); // -> false 
+
+console.log(petsMap.get("hamsters")); // -> 5
+petsMap.set("hamsters", 6);
+console.log(petsMap.get("hamsters")); // -> 6
+petsMap.delete("hamsters");
+console.log(petsMap.get("hamsters")); // -> undefined
+petsMap.clear();
+console.log(petsMap.size); // -> 0
+petsMap.set(2,2);
+console.log(petsMap.has(2));
+
+let anotherPetsMap = new Map([["snakes", 1],["cats", 3],["dogs", 2]]);
+anotherPetsMap.forEach((value, key) => console.log(`${key} : ${value}`)); // -> snakes : 1 -> cats : 3 -> dogs : 2
+
+let petValuesIterator = anotherPetsMap.values();
+console.log(petValuesIterator.next().value); // -> 1
+console.log(petValuesIterator.next().value); // -> 3
+console.log(petValuesIterator.next().value); // -> 2
+
+let petKeysIterator = anotherPetsMap.keys();
+console.log(petKeysIterator.next().value); // -> snakes
+console.log(petKeysIterator.next().value); // -> cats
+console.log(petKeysIterator.next().value); // -> dogs
+
+let petValuesIterator2 = anotherPetsMap.entries();
+console.log(petValuesIterator2.next().value); // -> [ 'snakes', 1 ]
+console.log(petValuesIterator2.next().value); // -> [ 'cats', 3 ]
+console.log(petValuesIterator2.next().value); // -> [ 'dogs', 2 ]
+
+let petsIterator = anotherPetsMap.entries();
+let result = petsIterator.next();
+while (!result.done) {
+    console.log(result.value); // -> ["snakes", 1] -> "cats", 3] -> ["dogs", 2]
+ result = petsIterator.next();
+}
+ */
+/* 
+console.log("\n------The for ... of loop------\n");
+
+let petsArray = ["cat", "dog", "hamster"];
+for( let pet of petsArray) {
+    console.log(pet); // -> cat -> dog -> hamster
+};
+let petsSet = new Set(["cat", "dog", "hamster"]);
+for( let pet of petsSet) {
+    console.log(pet); // -> cat -> dog -> hamster
+};
+let petsMap = new Map([["cats", 1], ["dogs", 3], ["hamsters", 2]]);
+for( let pet of petsMap) {
+    console.log(pet); // -> ["cats", 1] -> ["dogs", 3] -> ["hamsters", 2]
+    console.log(pet[0]); // -> cats -> dogs -> hamsters
+}
+ */
+/* 
+console.log("\n------The spread operator in maps------\n");
+
+let petsMap = new Map([["cats", 1], ["dogs", 3], ["hamsters", 2]]);
+console.log(petsMap instanceof Map); // -> true
+let petsArray = [...petsMap]; // -> [["cats", 1], ["dogs", 3], ["hamsters", 2]]
+console.log(petsArray instanceof Array); // -> true
+ */
+
+console.log("\n------Object------\n");
+
+let anotherPetsObj = {"snakes": 1,"cats": 3,"dogs": 2};
+console.log(anotherPetsObj.snakes); // -> 1
+anotherPetsObj.snakes = 2;
+console.log(anotherPetsObj.snakes); // -> 2
+delete anotherPetsObj.snakes;
+console.log(anotherPetsObj.snakes); // -> undefined
+anotherPetsObj.snakes = 0;
+console.log(anotherPetsObj.snakes); // 0
+
+Object.keys(anotherPetsObj).forEach(key=>console.log(key)); // -> snakes -> cats -> dogs
+Object.values(anotherPetsObj).forEach(key=>console.log(key)); // -> 1 -> 3 -> 2
+Object.entries(anotherPetsObj).forEach(key=>console.log(key)); // -> ["snakes", 1] -> ["cats", 3] -> ["dogs", 2]
+
+
+for (let key in anotherPetsObj) {
+    console.log(key); // -> snakes -> cats -> dogs
+    console.log(anotherPetsObj[key]); // -> 1 -> 3 -> 2
+}
+
+let petsObj = {"cats": 1, "dogs": 3, "hamsters": 2};
+let newPetsObj = {...petsObj, "sharks": 1}; // -> {cats: 1, dogs: 3, hamsters: 2, sharks: 1}
